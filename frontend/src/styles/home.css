@@ -1,4 +1,7 @@
 /* Container for the whole page */
+
+@import "tailwindcss";
+
 div {
     font-family: Arial, sans-serif;
   }

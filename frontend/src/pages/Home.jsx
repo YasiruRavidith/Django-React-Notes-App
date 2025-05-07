@@ -2,6 +2,8 @@ import { useState,useEffect } from "react";
 import api from "../api";
 import "../styles/home.css"
 import Note from "../components/Note"
+import { Link } from "react-router-dom";
+
 
 
 function Home() {
@@ -35,51 +37,54 @@ function Home() {
             .catch((error) => alert(error));
     };
 
-    const createNote = (e) => {
-        e.preventDefault();
-        api
-            .post("/api/notes/", { content, title })
-            .then((res) => {
-                if (res.status === 201) alert("Note created!");
-                else alert("Failed to make note.");
-                getNotes();
-            })
-            .catch((err) => alert(err));
-    };
+
 
     return (
-        <div>
-            <div>
-                <h2>Notes</h2>
+        <div className="container mx-auto px-4 py-8"> 
+
+        <div className="flex justify-between items-center mb-8">
+            <h2 className="text-3xl font-bold text-gray-800">My Notes</h2> 
+            <div className="flex items-center gap-x-3">
+            <Link
+                to="/create-notes"
+                className="inline-flex items-center justify-between  px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-150"
+            >
+                Add Note
+            </Link>
+
+            <Link
+                to="/logout"
+                className="inline-flex items-center justify-center px-7 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors duration-150"
+            >
+                Logout
+            </Link>
+            </div>
+            
+        </div>
+
+        {notes.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-1">
                 {notes.map((note) => (
                     <Note note={note} onDelete={deleteNote} key={note.id} />
                 ))}
             </div>
-            <h2>Create a Note</h2>
-            <form onSubmit={createNote}>
-                <label htmlFor="title">Title:</label>
-                <br />
-                <input
-                    type="text"
-                    id="title"
-                    name="title"
-                    required
-                    onChange={(e) => setTitle(e.target.value)}
-                    value={title}
-                />
-                <label htmlFor="content">Content:</label>
-                <br />
-                <textarea
-                    id="content"
-                    name="content"
-                    required
-                    value={content}
-                    onChange={(e) => setContent(e.target.value)}
-                ></textarea>
-                <br />
-                <input type="submit" value="Submit"></input>
-            </form>
-        </div>
+        ) : (
+            <div className="text-center py-12">
+                <h3 className="mt-2 text-lg font-medium text-gray-700">No notes yet</h3>
+                <p className="mt-1 text-sm text-gray-500">
+                    Get started by creating a new note.
+                </p>
+                <div className="mt-6">
+                     <Link
+                        to="/create-notes" 
+                        className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                    >
+                        Create Note
+                    </Link>
+                </div>
+            </div>
+        )}
+    </div>
     );
 }
 

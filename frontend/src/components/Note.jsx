@@ -5,11 +5,11 @@ function Note({ note, onDelete }) {
     const formattedDate = new Date(note.created_at).toLocaleDateString("en-US")
 
     return (
-        <div className="note-container">
-            <p className="note-title">{note.title}</p>
+        <div className="note-container grid gap-2">
+            <p className="note-title text-2xl">{note.title}</p>
             <p className="note-content">{note.content}</p>
-            <p className="note-date">{formattedDate}</p>
-            <button className="delete-button" onClick={() => onDelete(note.id)}>
+            <p className="note-date mt-4 mb-0">{formattedDate}</p>
+            <button className="delete-button h-10 w-20 " onClick={() => onDelete(note.id)}>
                 Delete
             </button>
         </div>

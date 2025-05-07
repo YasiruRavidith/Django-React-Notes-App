@@ -5,6 +5,7 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import NotFound from './pages/NotFound'
 import ProtectedRoute from './components/ProtectedRoute'
+import CreateNotes from './pages/CreateNotes'
 
 function Logout(){
   localStorage.clear()
@@ -25,6 +26,12 @@ function App() {
         <Route path = "/" element = {
           <ProtectedRoute>
             <Home/>
+            </ProtectedRoute>
+          }/>
+
+        <Route path = "/create-notes" element = {
+          <ProtectedRoute>
+            <CreateNotes/>
             </ProtectedRoute>
           }/>
 

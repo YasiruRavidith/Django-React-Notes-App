@@ -1,6 +1,6 @@
 import { useState } from "react";
 import api from "../api";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
 import "../styles/Form.css"
 
@@ -33,7 +33,7 @@ function Form({ route, method }) {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="form-container">
+        <form onSubmit={handleSubmit} className="form-container ">
             <h1>{name}</h1>
             <input
                 className="form-input"
@@ -49,11 +49,30 @@ function Form({ route, method }) {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Password"
             />
+
             
-            <button className="form-button" type="submit">
+                    
+            <button className="form-button bg-blue-600" type="submit">
                 {name}
             </button>
+            { name === "Login" && (
+            <div className="flex items-center gap-x-1 text-red-600 italic">
+            If you don't have an account,
+   
+
+            
+                <Link
+                    to="/register"
+                    className=" text-red-900 hover:text-blue-700"
+                >
+                    Register here
+                </Link>
+            
+            </div>
+            )}
+            
         </form>
+        
     );
 }
 
