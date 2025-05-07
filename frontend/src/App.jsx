@@ -29,6 +29,7 @@ function App() {
           }/>
 
         <Route path = "/login" element = {<Login/>}/>
+        <Route path = "/logout" element = {<Logout/>}/>
         <Route path = "/register" element = {<RegisterAndLogut/>}/>
         <Route path = "*" element = {<NotFound/>}/>
       </Routes>
